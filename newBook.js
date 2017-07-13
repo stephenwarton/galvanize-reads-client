@@ -1,17 +1,10 @@
 $(appReady);
 
-let API_URL = 'https://g-reads-api.herokuapp.com/api/v1/books';
-
-function getUrl() {
-  API_URL = 'https://g-reads-api.herokuapp.com/api/v1/books';
-  if (window.location.href == 'http://127.0.0.1:8080/new_book.html') {
-    API_URL = 'http://localhost:3000/api/v1/books';
-  }
-}
+let API_URL = (window.location.hostname == "127.0.0.1") ? `http://localhost:3000/api/v1`: `https://g-reads-api.herokuapp.com/api/v1`;
 
 function appReady() {
   $(".button-collapse").sideNav();
-  getUrl();
+  populateSelect();
   addBook();
 }
 
@@ -19,10 +12,27 @@ function addBook() {
   $('.add-book').on('click', (event) => {
     event.preventDefault();
     let bookInfo = getBookInfo();
-    if (bookInfo) {
-      $.post(API_URL, bookInfo)
+    let authors = $('select').val();
+    if(authors.length === 0){
+      Materialize.toast('Book must have at least one author!', 5000);
+    }
+    else if (bookInfo) {
+      $.post(`${API_URL}/books`, bookInfo)
         .then(results => {
-          console.log(results);
+          let bookId = results[0].id;
+          authors.forEach(authorId => {
+            let bookAuthor = {
+              book_id: bookId,
+              author_id: parseInt(authorId)
+            }
+            $.post(`${API_URL}/book_author`, bookAuthor)
+              .then(results => {
+                //console.log(results);
+              })
+              .catch(error => {
+                Materialize.toast(error.responseJSON.message, 3000);
+              });
+          });
           Materialize.toast('Success!', 3000);
         })
         .catch(error => {
@@ -40,7 +50,7 @@ function getBookInfo() {
 
   const validTitle = typeof title == 'string' && title.trim() != '';
   if (!validTitle) {
-    Materialize.toast('Title cannot be empty', 3000);
+    Materialize.toast('Book must have a title!', 5000);
     return false;
   } else {
 
@@ -51,4 +61,18 @@ function getBookInfo() {
       cover_url: coverUrl
     };
   }
+}
+
+function populateSelect(){
+ $('select').material_select();
+ getAuthors();
+}
+
+function getAuthors(){
+  $.get(`${API_URL}/authors`).then(results => {
+    results.forEach(author => {
+       $('select').append(`<option value="${author.id}">${author.first_name} ${author.last_name}</option>`);
+    });
+    $('select').material_select();
+  });
 }
