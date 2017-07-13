@@ -18,7 +18,7 @@
       <a href="index.html" class="brand-logo">
         <!-- Books icon by Icons8 -->
         <img class="icon icons8-Books" width="48" height="48" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABlklEQVRoQ+2YYVHEMBBG3zkAB6CAk4AEJIACQAFIwAEWcAA4wAFIAAUwe0OGXkiaTbvXpDPbv91sv5fd/dpmw8qvzcr14wCtK5irwBFwB1wAJwcWOasLUotF/DOwPbDwkN4c4AG4Xki8PMYc4H2BthnujznAd8XufwH3wBPwUbHOLDRFrwUQ8efAm5maCYnmANwCMi9yNXOtOQCnv23T1LXmAIS1TV3LAqCpa1kAaId+wogml+xpdgCgVIGpL6pc3sUr4ADRJHgF4s/g0gxYuU/y89tdSOFCXoHWQ+wV8ApkeiA4mNto5ZAs/iau1FcMrwZ4BS5HTh26b6Hw75vbmu4BjoHPkcJ2ByDnPGcDwS/A1ZpaSPr9sThKf2ea3VVAtMdVSPF0+x4IJ23SOsNWiiFyACXXUhRXH1L6X5V2usmA5ABKrqVXp4gsAShS/DuVKLmWJqc6xgKg1rXU4jSBFgBa19Lo0cQUPyU0SeIYjWtNyTvmfrt7FhXQulbXAEHcmGutAsBKpDqPVQupH2gd6ADWO1qb7weIMFsxzZK9LgAAAABJRU5ErkJggg==">        Galvanize Reads</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="books.html">BOOKS</a></li>
         <li><a href="authors.html">AUTHORS</a></li>
@@ -26,42 +26,48 @@
       <ul class="side-nav" id="mobile-demo">
         <li><a href="books.html">BOOKS</a></li>
         <li><a href="authors.html">AUTHORS</a></li>
-      </ul>
+</ul>
     </div>
   </nav>
-  <div class="row books">
-    <div class="col s6 offset-s9">
-      <a href="new_book.html" class="btn waves-effect waves-light">Add New Book</a>
-    </div>
-  </div>
 
-  <script id="book-template" type="text/x-handlebars-template">
-    <div class="col s12 m7">
-      <div class="card horizontal">
-        <div class="card-image">
-          <img src="{{cover_url}}">
-          <div class="card-action">
-            <a href="edit_book.html?={{id}}" class="btn waves-effect waves-light">Edit Book</a>
-          </div>
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5>{{title}}</h5>
-            <i><h6>{{genre}}</h6></i>
-            <p>{{description}}</p>
-          </div>
-          <div class="card-action">
-            <a href="delete_book.html?={{id}}" class="btn waves-effect waves-light">Delete Book</a>
-          </div>
-        </div>
+
+<div class="book">
+</div>
+
+  <script id="form-template" type="text/x-handlebars-template">
+  <div class="row">
+    <form class="col s12 m10">
+      <div class="input-field col s12">
+        <input value="{{title}}" id="title" type="text" class="validate">
+        <label class="active" for="title">Title</label>
       </div>
-    </div>
-  </script>
+      <div class="input-field col s12">
+        <input value="{{genre}}" id="genre" type="text" class="validate">
+        <label class="active" for="genre">Genre</label>
+      </div>
+      <div class="input-field col s12">
+        <input value="{{cover_url}}" id="cover-url" type="text" class="validate">
+        <label class="active" for="cover-url">Book Cover URL</label>
+      </div>
+      <div class="input-field col s12">
+        <textarea id="description" class="materialize-textarea">{{description}}</textarea>
+        <label class="active" for="description">Description</label>
+      </div>
+      <div class="input-field col s12">
+        <select multiple>
+          <option value="Authors" disabled selected>Select Authors</option>
+        </select>
+        <label>Authors</label>
+      </div>
+      <button class="btn waves-effect waves-light edit-book" type="submit" name="action">Submit</button>
+    </form>
+  </div>
+</script>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-  <script src="books.js"></script>
+  <script src="editBook.js"></script>
 </body>
 
 </html>
