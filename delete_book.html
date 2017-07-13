@@ -30,9 +30,6 @@
     </div>
   </nav>
   <div class="row books">
-    <div class="col s6 offset-s9">
-      <a href="new_book.html" class="btn waves-effect waves-light">Add New Book</a>
-    </div>
   </div>
 
   <script id="book-template" type="text/x-handlebars-template">
@@ -40,9 +37,6 @@
       <div class="card horizontal">
         <div class="card-image">
           <img src="{{cover_url}}">
-          <div class="card-action">
-            <a href="edit_book.html" class="btn waves-effect waves-light">Edit Book</a>
-          </div>
         </div>
         <div class="card-stacked">
           <div class="card-content">
@@ -51,7 +45,7 @@
             <p>{{description}}</p>
           </div>
           <div class="card-action">
-            <a href="delete_book.html?={{id}}" class="btn waves-effect waves-light">Delete Book</a>
+            <a class="btn waves-effect waves-light delete">Delete Book</a>
           </div>
         </div>
       </div>
@@ -61,7 +55,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-  <script src="books.js"></script>
+  <script src="deleteBook.js"></script>
 </body>
 
 </html>
